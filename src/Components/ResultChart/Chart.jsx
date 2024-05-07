@@ -6,6 +6,7 @@ import {
   YAxis,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 
 const Chart = () => {
@@ -73,17 +74,18 @@ const Chart = () => {
   ];
 
   return (
-    <div>
-      <h1 className="bg-green-700 rounded-md p-5 m-5">Explore Rechart...</h1>
-      <LineChart width={600} height={500} data={results}>
-        <Line dataKey={"sgpa"} stroke="red"></Line>
-        <Line dataKey={"cgpa"} stroke="green"></Line>
-        <XAxis dataKey={"semester"}></XAxis>
-        <YAxis dataKey={""}></YAxis>
-        <CartesianGrid stroke="gray" strokeDasharray={"5 5"}></CartesianGrid>
-        <Tooltip></Tooltip>
-        <Legend></Legend>
-      </LineChart>
+    <div className="w-full lg:w-3/5 md:w-full sm:w-full ">
+      <ResponsiveContainer width="100%" height={500}>
+        <LineChart data={results}>
+          <Line dataKey={"sgpa"} stroke="red" />
+          <Line dataKey={"cgpa"} stroke="green" />
+          <XAxis dataKey={"semester"} />
+          <YAxis />
+          <CartesianGrid stroke="gray" strokeDasharray={"5 5"} />
+          <Tooltip />
+          <Legend />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 };
