@@ -11,14 +11,17 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { InfinitySpin } from "react-loader-spinner";
 
 const Phones = () => {
   const [phones, setPhones] = useState([]);
   const [phoneData, setPhoneData] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch("https://openapi.programming-hero.com/api/phones?search=iphone")
       .then((res) => res.json())
       .then((data) => setPhones(data.data));
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -38,6 +41,14 @@ const Phones = () => {
   }, []);
   return (
     <div className="m-5 flex flex-col items-center">
+      {loading && (
+        <InfinitySpin
+          visible={true}
+          width="200"
+          color="#4fa94d"
+          ariaLabel="infinity-spin-loading"
+        />
+      )}
       <h2 className="text-2xl bg-green-700 my-3 p-3 rounded-tl-badge rounded-br-badge">
         Available Phones
       </h2>
@@ -46,6 +57,7 @@ const Phones = () => {
           <Phone key={i} phone={phone}></Phone>
         ))}
       </div>
+
       <div className="w-full lg:w-3/5">
         <ResponsiveContainer width="100%" height={500}>
           <BarChart data={phoneData}>
